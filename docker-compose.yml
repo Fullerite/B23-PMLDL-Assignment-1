@@ -1,0 +1,17 @@
+services:
+  fastapi:
+    build:
+      context: .
+      dockerfile: code/deployment/api/Dockerfile
+    container_name: mpg_api_service
+    ports:
+      - "8000:80"
+  streamlit:
+    build:
+      context: .
+      dockerfile: code/deployment/app/Dockerfile
+    container_name: mpg_webapp_service
+    ports:
+      - "8501:8501"
+    depends_on:
+      - fastapi
